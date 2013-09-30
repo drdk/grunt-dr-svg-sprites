@@ -1,0 +1,42 @@
+{
+  "name": "grunt-svg-sprites",
+  "description": "Grunt plugin to create SVG sprites with PNG fallbacks at needed sizes",
+  "version": "0.1.0",
+  "homepage": "",
+  "author": {
+    "name": "rafl",
+    "email": "rafl@dr.dk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github01.net.dr.dk/tu-web-applikationer/global-assets.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "lodash": "~1.3.1",
+    "async": "*",
+    "phantomjs": "*",
+    "svgo": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
