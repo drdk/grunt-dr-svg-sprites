@@ -38,7 +38,7 @@ module.exports = function (config, callback) {
 
 	function buildCSS (err, sprites) {
 
-		var cssFileName = config.paths.css + "/" + [config.prefix, "sprites"].join("-") + "." + config.cssSuffix,
+		var cssFileName = config.paths.css + "/" + joinName(config.prefix, "sprites") + "." + config.cssSuffix,
 			css = "",
 			spriteName, sprite,
 			element,
@@ -67,19 +67,21 @@ module.exports = function (config, callback) {
 }\n\
 ";
 
+
+
 		for (spriteName in sprites) {
 			sprite = sprites[spriteName];
 			classes = [];
 			var spriteSelectors,
 				svgSelectors = [],
-				sourceSprite = config.paths.sprites + "/" + [config.prefix, spriteName, "sprite"].join("-") + ".svg";
+				sourceSprite = config.paths.sprites + "/" + joinName(config.prefix, spriteName, "sprite") + ".svg";
 
 			var i = 0,
 				l = sprite.elements.length;
 			while (i < l) {
 				element = sprite.elements[i];
 				pseudoClassName = element.className;
-				className = substitute(pseudoClassName, {size: sizeLabel});
+				className = makeClassName(pseudoClassName, sizeLabel);
 				classes.push(className);
 				i++;
 			}
@@ -109,7 +111,7 @@ module.exports = function (config, callback) {
 				while (i < l) {
 					element = sprite.elements[i];
 					pseudoClassName = element.className;
-					className = substitute(pseudoClassName, {size: sizeLabel});
+					className = makeClassName(pseudoClassName, sizeLabel);
 					spriteSelectors.push(className);
 					svgSelectors.push(className);
 					css += substitute(cssElementRule, {
@@ -121,7 +123,7 @@ module.exports = function (config, callback) {
 					i++;
 				}
 
-				var filename = config.paths.sprites + "/" + [config.prefix, spriteName, sizeLabel, "sprite"].join("-") + ".png",
+				var filename = config.paths.sprites + "/" + joinName(config.prefix, spriteName, sizeLabel, "sprite") + ".png",
 					width = scaleValue(sprite.width, size, refSize),
 					height = scaleValue(sprite.height, size, refSize);
 
@@ -215,7 +217,7 @@ module.exports = function (config, callback) {
 			spriteData.width = x;
 			spriteData.height = spriteHeight;
 
-			fs.writeFileSync(path.relative(process.cwd(), config.paths.sprites + "/" + [config.prefix, spriteName, "sprite"].join("-") + ".svg"), svgutil.wrap(x, spriteHeight, elements), "utf8");
+			fs.writeFileSync(path.relative(process.cwd(), config.paths.sprites + "/" + joinName(config.prefix, spriteName, "sprite") + ".svg"), svgutil.wrap(x, spriteHeight, elements), "utf8");
 			callback(null, spriteData);
 		});
 	}
@@ -249,6 +251,23 @@ module.exports = function (config, callback) {
 	function roundUpToUnit (num) {
 		var dif = num % unit;
 		return (dif) ? num + unit - dif : num;
+	}
+
+	function joinName () {
+		var args = [].slice.call(arguments);
+		return args.filter(function(arg){ return !!arg; }).join("-");
+	}
+
+	function makeClassName (string, sizeLabel) {
+
+		if (string.indexOf("{size}") > -1) {
+			return substitute(string, {size: sizeLabel});
+		}
+		else {
+			string += "-" + sizeLabel;
+		}
+		
+		return ((string[0] != ".") ? "." : "") + string;
 	}
 
 	function substitute (string, object) {
