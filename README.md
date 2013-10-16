@@ -117,7 +117,7 @@ grunt.initConfig({
         large: 30
         small: 15
       },
-      refSize: 30,
+      refSize: "large",
       unit: 5,
     },
   },
@@ -140,7 +140,7 @@ grunt.initConfig({
         large: 30
         small: 15
       },
-      refSize: 30,
+      refSize: "large",
       unit: 5,
     },
   },
