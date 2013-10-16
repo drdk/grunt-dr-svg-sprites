@@ -113,6 +113,12 @@ grunt.initConfig({
         sprites: "img/_source/sprites",
         css: "css/shared",
       },
+      sizes: {
+        large: 30
+        small: 15
+      },
+      refSize: 30,
+      unit: 5,
     },
   },
 })
@@ -130,6 +136,12 @@ grunt.initConfig({
         sprites: "img/_source/sprites",
         css: "css/shared",
       },
+      sizes: {
+        large: 30
+        small: 15
+      },
+      refSize: 30,
+      unit: 5,
     },
   },
 })
