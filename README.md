@@ -107,10 +107,12 @@ Type: `Object`
 ```js
 grunt.initConfig({
   svg_sprites: {
-    paths: {
-      spriteElements: "img/_source/svg-logos",
-      sprites: "img/_source/sprites",
-      css: "css/shared",
+    options: {
+      paths: {
+        spriteElements: "img/_source/svg-logos",
+        sprites: "img/_source/sprites",
+        css: "css/shared",
+      },
     },
   },
 })
@@ -121,11 +123,13 @@ grunt.initConfig({
 ```js
 grunt.initConfig({
   svg_sprites: {
-    paths: {
-      elements: "img/_source/svg-logo-elements",
-      spriteElements: "img/_source/svg-logos",
-      sprites: "img/_source/sprites",
-      css: "css/shared",
+    options: {
+      paths: {
+        elements: "img/_source/svg-logo-elements",
+        spriteElements: "img/_source/svg-logos",
+        sprites: "img/_source/sprites",
+        css: "css/shared",
+      },
     },
   },
 })
