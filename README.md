@@ -36,17 +36,34 @@ grunt.initConfig({
 
 
 #### options.paths
+
 Type: `Object`
-
-##### options.paths.elements
-Type: `String`
-
-Optional. Source path of svg elements to composite sprite-elements.
 
 
 ##### options.paths.spriteElements
 Type: `String`
-Source path of the svg elements to make up a sprite.
+
+Sprites will be generated from each subfolder and its contained svg-elements.
+
+Given:
+
+```javascript
+  paths: {
+    spriteElements: "img/_source/sprites/",
+```
+
+... and a file structure like:
+
+```
+  _source
+    |- sprites
+      |- icons
+        |- print.svg
+        |- email.svg
+        |- link.svg
+```
+
+... you would get the resulting sprite for `icons`.
 
 ##### options.paths.sprites
 Type: `String`
@@ -57,6 +74,11 @@ Destination path of the generated sprite images.
 Type: `String`
 
 Destination path of the generated stylesheet.
+
+##### options.paths.elements
+Type: `String`
+
+Optional. Source path of svg elements to composite sprite-elements.
       
 #### options.map
 Type: `Object`
@@ -101,7 +123,7 @@ A key from the `sizes` option that relates to the basic height of your source sv
 #### options.sprites
 Type: `Object`
 
-
+An object 
 {spriteName}
 
 
@@ -131,6 +153,8 @@ grunt.initConfig({
 
 #### Custom Options
 
+If building svg elements from 
+
 ```js
 grunt.initConfig({
   svg_sprites: {
@@ -147,6 +171,10 @@ grunt.initConfig({
       },
       refSize: "large",
       unit: 5,
+    },
+    sprites: {
+      "": {
+      }
     },
   },
 })
