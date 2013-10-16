@@ -141,11 +141,12 @@ grunt.initConfig({
         css: "css/shared",
       },
       sizes: {
-        large: 30
-        small: 15
+        xlarge: 36,
+        large: 24,
+        small: 16
       },
       refSize: "large",
-      unit: 5,
+      unit: 8,
     },
   },
 })
@@ -153,7 +154,7 @@ grunt.initConfig({
 
 #### Custom Options
 
-If building svg elements from 
+You can even compose svg-elements from smaller elements if you define a `sprites` object. Each key will describe a sprite as an array where each index in turn describes an svg-element.
 
 ```js
 grunt.initConfig({
@@ -166,15 +167,30 @@ grunt.initConfig({
         css: "css/shared",
       },
       sizes: {
-        large: 30
-        small: 15
+        xlarge: 36,
+        large: 24,
+        small: 16
       },
       refSize: "large",
-      unit: 5,
+      unit: 8,
     },
     sprites: {
-      "": {
-      }
+      shapes: [
+        {
+          name: "trangle-circle",
+          elements: [
+            {name: "triangle"},
+            {name: "circle", x: -5, fill: "#000"}
+          ]
+        },
+        {
+          name: "triangle-square",
+          elements: [
+            {name: "triangle", fill: "#F00"},
+            {name: "square", x: -10, y: 5}
+          ]
+        }
+      ]
     },
   },
 })
