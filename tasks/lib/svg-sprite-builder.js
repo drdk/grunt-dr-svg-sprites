@@ -8,7 +8,7 @@ module.exports = function (config, callback) {
 		fsutil = require("./fsutil"),
 		svgutil = require("./svgutil");
 	
-	var unit = config.unit;
+	var unit = config.unit || 10;
 
 	var root = path.relative(process.cwd(), config.paths.spriteElements),
 		spriteNames = fsutil.getDirs(root),
