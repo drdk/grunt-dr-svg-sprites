@@ -28,9 +28,6 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
   },
 })
 ```
@@ -81,17 +78,25 @@ Optional. Stylesheet filetype suffix.
 #### options.unit
 Type: `Number`
 
-Defines unit size of the grid the sprite elements snap to.
-
-#### options.refSize
-Type: `String`
-
-Defines the default size
+Defines unit size of the grid the sprite elements snap to. Default is 10.
 
 #### options.sizes
 Type: `Object`
 
 A hash of size labels and values (`Number`).
+
+```javascript
+  sizes: {
+    large: 30,
+    small: 15
+  }
+```
+
+#### options.refSize
+Type: `String`
+
+A key from the `sizes` option that relates to the basic height of your source svg-elements. All other sizes will be calculated relating to this.
+
         
 #### options.sprites
 Type: `Object`
