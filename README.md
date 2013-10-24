@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('dr-grunt-svg-sprites');
 ```
 
-## The "svg_sprites" task
+## The "svg-sprites" task
 
 ### Overview
 In your project's Gruntfile, add a section named `svg-sprites` to the data object passed into `grunt.initConfig()`.
@@ -133,7 +133,7 @@ An object
 
 ```js
 grunt.initConfig({
-  svg_sprites: {
+  "svg-sprites": {
     options: {
       paths: {
         spriteElements: "img/_source/svg-logos",
@@ -158,7 +158,7 @@ You can even compose svg-elements from smaller elements if you define a `sprites
 
 ```js
 grunt.initConfig({
-  svg_sprites: {
+  "svg-sprites": {
     options: {
       paths: {
         elements: "img/_source/svg-logo-elements",

@@ -2,11 +2,11 @@
  * dr-grunt-svg-sprites
  * 
  *
- * Copyright (c) 2013 rafl
+ * Copyright (c) 2013 rasmusfl0e
  * Licensed under the MIT license.
  */
 
-'use strict';
+"use strict";
 
 module.exports = function(grunt) {
 
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 	*/
 
 
-	grunt.registerTask('svg-sprites', 'Build SVG sprites with PNG fallbacks', function() {
+	grunt.registerTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
 
 		var options = this.options({
 			prefix: "",

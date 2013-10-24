@@ -52,7 +52,7 @@ function transform (data, x, y, fill) {
 }
 
 function wrap (width, height, shapes) {
-	return '<svg baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" preserveAspectRatio="xMinYMin meet" viewBox="0 0 ' + width + ' ' + height + '" >' + shapes.join("") + '</svg>';
+	return '<svg baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" preserveAspectRatio="xMaxYMax meet" viewBox="0 0 ' + width + ' ' + height + '" >' + shapes.join("") + '</svg>';
 }
 
 exports.loadShape = loadShape;

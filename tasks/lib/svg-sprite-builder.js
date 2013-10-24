@@ -32,7 +32,8 @@ module.exports = function (config, callback) {
 		}(spriteName, spriteElements));
 		i++;
 	}
-	async.parallel(spriteTasks, buildCSS);
+
+	async.series(spriteTasks, buildCSS);
 
 	// build css and fallback pngs for all sizes
 
@@ -68,7 +69,6 @@ module.exports = function (config, callback) {
 ";
 
 
-
 		for (spriteName in sprites) {
 			sprite = sprites[spriteName];
 			classes = [];
@@ -85,20 +85,6 @@ module.exports = function (config, callback) {
 				classes.push(className);
 				i++;
 			}
-			
-			/*	
-			// add rule for setting svg sprite image
-			classes.forEach(function (className) {
-				var pngSelector = className.replace(/^(dr-logo-[^-]+).*$/, "[class*=\"$1\"][class*=\"{size}\"]");
-				if (spriteSelectors.indexOf(className) < 0) {
-					spriteSelectors.push(className);
-				}
-				var svgSelector = className.replace(/^(dr-logo)(-[^-]+).*$/, "[class*=\"$1\"][class*=\"$2\"]");
-				if (svgSelectors.indexOf(className) < 0) {
-					svgSelectors.push(className);
-				}
-			});
-			*/
 
 			for (sizeLabel in config.sizes) {
 
@@ -149,10 +135,16 @@ module.exports = function (config, callback) {
 				spriteUrl: path.relative(config.paths.css, sourceSprite).replace(/\\/g, "/")
 			});
 		}
+		
+		var filepath = path.relative(process.cwd(), cssFileName),
+			pathToFile = filepath.replace(/\/[^\/]+$/, "");
 
-		fs.writeFileSync(path.relative(process.cwd(), cssFileName), css, "utf8");
+		if (!fs.existsSync(pathToFile)) {
+			fsutil.mkdirRecursive(pathToFile);
+		}
+		fs.writeFileSync(filepath, css, "utf8");
 
-		async.parallel(pngSpritesToBuild, function (err, result) {
+		async.series(pngSpritesToBuild, function (err, result) {
 			callback(null, "sprites built");
 		});
 
@@ -176,7 +168,7 @@ module.exports = function (config, callback) {
 			file = files[i];
 			tasks[file] = (function (file) {
 				return function (_callback) {
-					svgutil.loadShapeRaw(file, _callback);
+					svgutil.loadShape(file, _callback);
 				};
 			}(file));
 			i++;
@@ -184,7 +176,7 @@ module.exports = function (config, callback) {
 
 		fsutil.mkdirRecursive(config.paths.sprites);
 
-		async.parallel(tasks, function (err, results) {
+		async.series(tasks, function (err, results) {
 			var spriteData = {
 					elements: []
 				},
@@ -217,17 +209,17 @@ module.exports = function (config, callback) {
 			spriteData.width = x;
 			spriteData.height = spriteHeight;
 
-			fs.writeFileSync(path.relative(process.cwd(), config.paths.sprites + "/" + joinName(config.prefix, spriteName, "sprite") + ".svg"), svgutil.wrap(x, spriteHeight, elements), "utf8");
+			var filepath = path.relative(process.cwd(), config.paths.sprites + "/" + joinName(config.prefix, spriteName, "sprite") + ".svg");
+			fs.writeFileSync(filepath, svgutil.wrap(x, spriteHeight, elements), "utf8");
+
 			callback(null, spriteData);
 		});
 	}
 
 	function buildPNGSprite (input, output, width, height, callback) {
-		
-		//console.log("building PNG sprite:", output, "...");
 
 		var script = path.join(__dirname, "phantomjs-sprite-renderer.js"),
-			args = [phantomjs, script, path.relative(__dirname, input), path.relative(__dirname, output), width, height].join(" ");
+			args = [phantomjs, script, path.join(__dirname, "../../" + input), path.join(__dirname, "../../" + output), width, height].join(" ");
 
 		var pjs = exec(args, {
 				cwd: __dirname,

@@ -30,9 +30,9 @@ function getEntries (dir, type) {
 }
 
 function mkdirRecursive (dir) {
-	if (!fs.existsSync(dir)) {	
-		var parent = dir.replace(/\/[^\/]*$/, "");
-		if (parent && parent != "./" && parent != "../" && !fs.existsSync(parent)) {
+	if (dir && !fs.existsSync(dir)) {	
+		var parent = dir.replace(/(^|\/)[^\/]*$/, "");
+		if (dir != parent && parent && parent != "./" && parent != "../" && !fs.existsSync(parent)) {
 			mkdirRecursive(parent);
 		}
 		fs.mkdirSync(dir);
