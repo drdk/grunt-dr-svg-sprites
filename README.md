@@ -20,11 +20,11 @@ grunt.loadNpmTasks('dr-grunt-svg-sprites');
 ## The "svg_sprites" task
 
 ### Overview
-In your project's Gruntfile, add a section named `svg_sprites` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `svg-sprites` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  svg_sprites: {
+  "svg-sprites": {
     options: {
       // Task-specific options go here.
     },
