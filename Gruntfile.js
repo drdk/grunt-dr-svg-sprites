@@ -28,6 +28,9 @@ module.exports = function(grunt) {
 
 	clean: {
 		tests: ["tmp"],
+		options: {
+			deleteEmptyFolders: true
+		}
 	},
 
 	// Configuration to be run (and then tested).

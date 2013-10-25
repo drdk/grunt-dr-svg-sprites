@@ -136,7 +136,7 @@ module.exports = function (config, callback) {
 			});
 		}
 		
-		var filepath = path.relative(process.cwd(), cssFileName),
+		var filepath = path.relative(process.cwd(), cssFileName).replace(/\\/g, "/"),
 			pathToFile = filepath.replace(/\/[^\/]+$/, "");
 
 		if (!fs.existsSync(pathToFile)) {
@@ -219,7 +219,7 @@ module.exports = function (config, callback) {
 	function buildPNGSprite (input, output, width, height, callback) {
 
 		var script = path.join(__dirname, "phantomjs-sprite-renderer.js"),
-			args = [phantomjs, script, path.join(__dirname, "../../" + input), path.join(__dirname, "../../" + output), width, height].join(" ");
+			args = [phantomjs, script, path.join(__dirname, "../../" + input).replace(/\\/g, "/"), path.join(__dirname, "../../" + output).replace(/\\/g, "/"), width, height].join(" ");
 
 		var pjs = exec(args, {
 				cwd: __dirname,

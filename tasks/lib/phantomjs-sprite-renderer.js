@@ -57,9 +57,11 @@ var html = "\
 		</style>\
 	</head>\
 	<body>\
-		<img src=\"" + input.replace(/^.*\/(\/[^\/]+\/[^\/]+)$/, "$1") + "\" width=\"" + width + "\" height=\"" + height + "\" />\
+		<img src=\"" + input.replace(/^.*\/([^\/]+)$/, "$1") + "\" width=\"" + width + "\" height=\"" + height + "\" />\
 	</body>\
 </html>\
 ";
 
-page.setContent(html, "file://" + input.replace(/(\/[^\/]+\/[^\/]+)$/, "/") + "index.html");
+var url = "file://" + input.replace(/^|\//, "/").replace(/(\/[^\/]+)$/, "/") + "index.html";
+
+page.setContent(html, url);
