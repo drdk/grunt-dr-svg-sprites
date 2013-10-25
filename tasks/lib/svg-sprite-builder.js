@@ -144,7 +144,7 @@ module.exports = function (config, callback) {
 		}
 		fs.writeFileSync(filepath, css, "utf8");
 
-		async.series(pngSpritesToBuild, function (err, result) {
+		async.parallel(pngSpritesToBuild, function (err, result) {
 			callback(null, "sprites built");
 		});
 
@@ -176,20 +176,40 @@ module.exports = function (config, callback) {
 
 		fsutil.mkdirRecursive(config.paths.sprites);
 
-		async.series(tasks, function (err, results) {
+		async.parallel(tasks, function (err, results) {
 			var spriteData = {
 					elements: []
 				},
 				spriteHeight = 0, 
-				className,
-				logoUnitWidth = 0,
+				elementUnitWidth = 0,
 				elements = [],
-				svg,
 				x = 0;
-				
+			
+			var resultsList = [];
 			for (var filename in results) {
-				svg = results[filename];
-				className = filename.slice(filename.lastIndexOf("/") + 1, -suffix.length);
+				resultsList.push({
+					className: filename.slice(filename.lastIndexOf("/") + 1, -suffix.length),
+					filename: filename,
+					svg: results[filename]
+				});
+			}
+
+			resultsList.sort(function (a, b) {
+				if (a.className > b.className) {
+					return 1;
+				}
+				if (a.className < b.className) {
+					return -1;
+				}
+				// a must be equal to b
+				return 0;
+			});
+
+			resultsList.forEach(function (result) {
+				var filename = result.filename,
+					svg = result.svg,
+					className = result.className;
+					
 				elementUnitWidth = roundUpToUnit(svg.info.width);
 				if (spriteHeight < svg.info.height) {
 					spriteHeight = svg.info.height;
@@ -202,7 +222,8 @@ module.exports = function (config, callback) {
 				});
 				elements.push(svgutil.transform(svg.data, x, 0));
 				x += elementUnitWidth + unit;
-			}
+
+			});
 
 			x = roundUpToUnit(x);
 			spriteHeight = roundUpToUnit(spriteHeight);
