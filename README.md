@@ -83,13 +83,13 @@ Optional. Source path of svg elements to composite sprite-elements.
 #### options.map
 Type: `Object`
 
-
+Optional. 
 
 #### options.prefix
 Type: `String`
 Default value: `''`
 
-Optional. Stylesheet
+Optional. Defines a prefix for the name of the sprite stylesheet and images and also classnames. 
 
 #### options.cssSuffix
 Type: `String`
@@ -99,13 +99,14 @@ Optional. Stylesheet filetype suffix.
 
 #### options.unit
 Type: `Number`
+Default value: `10`
 
-Defines unit size of the grid the sprite elements snap to. Default is 10.
+Defines unit size of the grid the sprite elements snap to.
 
 #### options.sizes
 Type: `Object`
 
-A hash of size labels and values (`Number`).
+A hash of size labels and values (`Number`) that define the different sizes of the needed sprites.
 
 ```javascript
   sizes: {
@@ -115,9 +116,9 @@ A hash of size labels and values (`Number`).
 ```
 
 #### options.refSize
-Type: `String`
+Type: `String|Number`
 
-A key from the `sizes` option that relates to the basic height of your source svg-elements. All other sizes will be calculated relating to this.
+Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
 
         
 #### options.sprites
@@ -168,10 +169,9 @@ grunt.initConfig({
       },
       sizes: {
         xlarge: 36,
-        large: 24,
         small: 16
       },
-      refSize: "large",
+      refSize: 24,
       unit: 8,
     },
     sprites: {
@@ -195,3 +195,15 @@ grunt.initConfig({
   },
 })
 ```
+
+---
+
+## Changelog
+
+### 0.2.7
+
+Features:
+
+* `options.prefix` will now affect classnames also.
+* `options.refSize` is now no longer limited to sizes defined in `options.sizes`; it can take a raw number.  
+

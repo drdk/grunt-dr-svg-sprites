@@ -89,7 +89,7 @@ module.exports = function (config, callback) {
 			for (sizeLabel in config.sizes) {
 
 				size = config.sizes[sizeLabel];
-				refSize = config.sizes[config.refSize];
+				refSize = (typeof config.refSize == "string") ? config.sizes[config.refSize] : config.refSize;
 				spriteSelectors = [];
 
 				i = 0,
@@ -188,7 +188,7 @@ module.exports = function (config, callback) {
 			var resultsList = [];
 			for (var filename in results) {
 				resultsList.push({
-					className: filename.slice(filename.lastIndexOf("/") + 1, -suffix.length),
+					className: joinName(config.prefix, filename.slice(filename.lastIndexOf("/") + 1, -suffix.length)),
 					filename: filename,
 					svg: results[filename]
 				});
@@ -278,6 +278,10 @@ module.exports = function (config, callback) {
 		}
 		else {
 			string += "-" + sizeLabel;
+		}
+		
+		if (string[0] != "." && string.indexOf(config.prefix) != 0) {
+			string = config.prefix + "-" + string;
 		}
 		
 		return ((string[0] != ".") ? "." : "") + string;

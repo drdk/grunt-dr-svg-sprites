@@ -41,13 +41,14 @@ module.exports = function(grunt) {
 				sprites: "tmp/sprites",
 				css: "tmp/css"
 			},
+			prefix: "test",
 			sizes: {
-				small: 10,
-				medium: 30,
-				large: 50
+				small: 15,
+				//medium: 30,
+				large: 45
 			},
-			refSize: "medium",
-			unit: 10
+			refSize: 30,
+			unit: 5
 		}
 	},
 
