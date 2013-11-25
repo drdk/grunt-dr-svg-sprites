@@ -80,11 +80,6 @@ Type: `String`
 
 Optional. Source path of svg elements to composite sprite-elements.
       
-#### options.map
-Type: `Object`
-
-Optional. 
-
 #### options.prefix
 Type: `String`
 Default value: `''`
@@ -137,9 +132,9 @@ grunt.initConfig({
   "svg-sprites": {
     options: {
       paths: {
-        spriteElements: "img/_source/svg-logos",
-        sprites: "img/_source/sprites",
-        css: "css/shared",
+        spriteElements: "img/svg-logos",
+        sprites: "img/sprites",
+        css: "css",
       },
       sizes: {
         xlarge: 36,
@@ -162,10 +157,10 @@ grunt.initConfig({
   "svg-sprites": {
     options: {
       paths: {
-        elements: "img/_source/svg-logo-elements",
-        spriteElements: "img/_source/svg-logos",
-        sprites: "img/_source/sprites",
-        css: "css/shared",
+        elements: "img/svg-logo-elements",
+        spriteElements: "img/svg-logos",
+        sprites: "img/sprites",
+        css: "css",
       },
       sizes: {
         xlarge: 36,
