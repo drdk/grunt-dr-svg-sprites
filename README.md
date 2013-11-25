@@ -129,7 +129,7 @@ An object
 
 ### Usage Examples
 
-#### Default Options
+#### Basic Options
 
 ```js
 grunt.initConfig({
@@ -152,7 +152,7 @@ grunt.initConfig({
 })
 ```
 
-#### Custom Options
+#### Advanced Options
 
 You can even compose svg-elements from smaller elements if you define a `sprites` object. Each key will describe a sprite as an array where each index in turn describes an svg-element.
 
