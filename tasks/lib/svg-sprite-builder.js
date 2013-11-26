@@ -240,7 +240,7 @@ module.exports = function (config, callback) {
 	function buildPNGSprite (input, output, width, height, callback) {
 
 		var script = path.join(__dirname, "phantomjs-sprite-renderer.js"),
-			args = [phantomjs, script, path.join(__dirname, "../../" + input).replace(/\\/g, "/"), path.join(__dirname, "../../" + output).replace(/\\/g, "/"), width, height].join(" ");
+			args = [phantomjs, script, path.join(process.cwd(), input).replace(/\\/g, "/"), path.join(process.cwd(), output).replace(/\\/g, "/"), width, height].join(" ");
 
 		var pjs = exec(args, {
 				cwd: __dirname,

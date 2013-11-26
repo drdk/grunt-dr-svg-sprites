@@ -197,6 +197,12 @@ grunt.initConfig({
 
 ### 0.2.7
 
+Bug fixes:
+
+* Fixes creation of fallback pngs in wrong location.
+
+### 0.2.7
+
 Features:
 
 * `options.prefix` will now affect classnames also.
