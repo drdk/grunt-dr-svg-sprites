@@ -73,7 +73,7 @@ Destination path of the generated sprite images.
 ##### options.paths.css
 Type: `String`
 
-Destination path of the generated stylesheet.
+Optional. Destination path of the generated stylesheet. If left blank only svg sprites and png fallbacks are generated.
 
 ##### options.paths.elements
 Type: `String`
