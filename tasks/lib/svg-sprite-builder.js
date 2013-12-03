@@ -1,6 +1,7 @@
 module.exports = function (config, callback) {
 
 	var async = require("async"),
+		_ = require("lodash"),
 		phantomjs = require("phantomjs").path,
 		fs = require("fs"),
 		path = require("path"),
@@ -56,13 +57,13 @@ module.exports = function (config, callback) {
 				resultsList = [],
 				filename;
 			
-			for (filename in results) {
+			_.forOwn(results, function (svg, filename) {
 				resultsList.push({
 					className: joinName(config.prefix, filename.slice(filename.lastIndexOf("/") + 1, -suffix.length)),
 					filename: filename,
-					svg: results[filename]
+					svg: svg
 				});
-			}
+			});
 
 			resultsList.sort(function (a, b) {
 				if (a.className > b.className) {
@@ -114,12 +115,9 @@ module.exports = function (config, callback) {
 			sizeLabel, size,
 			refSize = (typeof config.refSize == "string") ? config.sizes[config.refSize] : config.refSize;
 		
-		for (spriteName in sprites) {
-			sprite = sprites[spriteName];
+		_.forOwn(sprites, function (sprite, spriteName) {
 			
-			for (sizeLabel in config.sizes) {
-				size = config.sizes[sizeLabel];
-				
+			_.forOwn(config.sizes, function (size, sizeLabel) {
 				var pngPath = config.paths.sprites + "/" + joinName(config.prefix, spriteName, sizeLabel, "sprite") + ".png",
 					width = scaleValue(sprite.width, size, refSize),
 					height = scaleValue(sprite.height, size, refSize);
@@ -130,13 +128,12 @@ module.exports = function (config, callback) {
 					height: height
 				};
 				
-				(function (svgPath, pngPath, width, height) {
-					pngSpritesToBuild.push(function (callback) {
-						buildPNGSprite(svgPath, pngPath, width, height, callback);
-					});
-				}(sprite.path, pngPath, width, height));
-			}
-		}
+				pngSpritesToBuild.push(function (callback) {
+					buildPNGSprite(sprite.path, pngPath, width, height, callback);
+				});
+			});
+			
+		});
 		
 		async.parallel(pngSpritesToBuild, function (err, result) {
 			if (config.paths.css) {
@@ -196,25 +193,13 @@ module.exports = function (config, callback) {
 ";
 
 		var css = "",
-			spriteName, sprite,
-			sizeLabel, size, refSize,
-			classes, svgClasses;
-
-		for (spriteName in sprites) {
-			sprite = sprites[spriteName];
 			refSize = (typeof config.refSize == "string") ? config.sizes[config.refSize] : config.refSize;
 
-			var spriteSelectors,
-				svgSelectors = [];
+		_.forOwn(sprites, function (sprite, spriteName) {
+			var svgSelectors = [];
 
-			classes = sprite.elements.map(function (element) {
-				return makeClassName(element.className, sizeLabel);
-			});
-
-			for (sizeLabel in config.sizes) {
-
-				size = config.sizes[sizeLabel];
-				spriteSelectors = [];
+			_.forOwn(config.sizes, function (size, sizeLabel) {
+				var spriteSelectors = [];
 				
 				sprite.elements.forEach(function (element) {
 					var className = makeClassName(element.className, sizeLabel);
@@ -237,15 +222,14 @@ module.exports = function (config, callback) {
 					width: pngSprite.width,
 					height: pngSprite.height
 				});
-
-			}
-
+			});
+				
 			// set image for svg
 			css += substitute(cssSVGSpriteImageRule, {
 				selector: ".svg " + svgSelectors.join(",\n.svg "),
 				spriteUrl: path.relative(config.paths.css, sprite.path).replace(/\\/g, "/")
 			});
-		}
+		});
 		
 		var cssFileName = config.paths.css + "/" + joinName(config.prefix, "sprites") + "." + config.cssSuffix,
 			filepath = path.relative(process.cwd(), cssFileName).replace(/\\/g, "/"),

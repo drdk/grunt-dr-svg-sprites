@@ -19,17 +19,16 @@ module.exports = function (config, callback) {
 		});
 	});
 	names = _.unique(names);
-	elements = _.zipObject(names, new Array(names.length));
 
 	// load svg elements
-	var tasks = {}, name;
-	for (name in elements) {
-		tasks[name] = (function (name) {
-			return function (callback) {
-				svgutil.loadShape(config.paths.elements + "/" + name + ".svg", callback);
-			};
-		}(name));
-	}
+	var tasks = {};
+	
+	names.forEach(function (name) {
+		tasks[name] = function (callback) {
+			svgutil.loadShape(config.paths.elements + "/" + name + ".svg", callback);
+		};
+	});
+	
 	async.parallel(tasks, function (err, results) {
 		elements = results;
 		buildSpriteElements();
@@ -42,18 +41,14 @@ module.exports = function (config, callback) {
 	function buildSpriteElements () {
 
 		//console.log("building sprite elements...");
-
-		var destination, spriteName, spriteElements, _elements;
 		
-		for (spriteName in config.sprites) {
-			spriteElements = config.sprites[spriteName];
-			destination = config.paths.spriteElements + "/" + spriteName;
+		_.forOwn(config.sprites, function (spriteElements, spriteName) {
+			var destination = config.paths.spriteElements + "/" + spriteName;
 			fsutil.mkdirRecursive(destination);
 			_.forOwn(spriteElements, function (spriteElement, fileName) {
 				buildSpriteElement(destination, spriteElement, fileName);
 			});
-			
-		}
+		});
 
 		callback(null, "sprite elements built");
 	}
