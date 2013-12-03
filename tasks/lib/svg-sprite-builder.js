@@ -274,7 +274,7 @@ module.exports = function (config, callback) {
 	function makeClassName (string, sizeLabel) {
 
 		if (string.indexOf("{size}") > -1) {
-			return substitute(string, {size: sizeLabel});
+			string = substitute(string, {size: sizeLabel});
 		}
 		else {
 			string += "-" + sizeLabel;
@@ -283,7 +283,7 @@ module.exports = function (config, callback) {
 		if (string[0] != "." && string.indexOf(config.prefix) != 0) {
 			string = config.prefix + "-" + string;
 		}
-		
+
 		return ((string[0] != ".") ? "." : "") + string;
 	}
 
