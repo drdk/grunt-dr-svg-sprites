@@ -14,31 +14,6 @@ module.exports = function(grunt) {
 		spriteBuilder = require("./lib/svg-sprite-builder"),
 		spriteElementBuilder;
 
-	/*
-
-		options
-			paths
-				elements - (optional) source path of svg elements to composite sprite-elements.
-				spriteElements - source path of the svg elements to make up a sprite.
-				sprites - destination path of the generated sprite images.
-				css - destination path of the generated stylesheet.
-			map - 
-			prefix - (optional) stylesheet
-			cssSuffix - (optional) stylesheet file suffix. Defaults to "css". 
-			unit - 
-			refSize - Defines the default size
-			sizes 
-				{sizeLabel} - 
-			sprites
-				{spriteName}
-
-
-
-		generated stylesheets are named as: {prefix} {spriteName}-sprite.{cssSuffix}
-
-	*/
-
-
 	grunt.registerTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
 
 		var options = this.options({
