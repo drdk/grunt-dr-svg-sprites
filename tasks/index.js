@@ -11,8 +11,8 @@
 module.exports = function(grunt) {
 
 	var async = require("async"),
-		spriteBuilder = require("./lib/svg-sprite-builder"),
-		spriteElementBuilder;
+		spriteBuilder = require("dr-svg-sprites").builder,
+		spriteElementComposer;
 
 	grunt.registerTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
 
@@ -29,10 +29,10 @@ module.exports = function(grunt) {
 
 		if (options.sprites) {
 
-			spriteElementBuilder = require("./lib/svg-sprite-element-builder");
+			spriteElementComposer = require("dr-svg-sprites").composer;
 
 			tasks.push(function (callback) {
-				spriteElementBuilder(options, callback);
+				spriteElementComposer(options, callback);
 			});
 
 		}
