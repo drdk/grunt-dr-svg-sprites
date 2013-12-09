@@ -13,49 +13,60 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 
-	jshint: {
-		all: [
-			"Gruntfile.js",
-			"tasks/*.js",
-			"<%= nodeunit.tests %>",
-		],
-		options: {
-			jshintrc: ".jshintrc",
+		jshint: {
+			all: [
+				"Gruntfile.js",
+				"tasks/*.js",
+				"<%= nodeunit.tests %>",
+			],
+			options: {
+				jshintrc: ".jshintrc",
+			},
 		},
-	},
-	
-	// Before generating any new files, remove any previously-created files.
+		
+		// Before generating any new files, remove any previously-created files.
 
-	clean: {
-		tests: ["tmp"],
-		options: {
-			deleteEmptyFolders: true
-		}
-	},
+		clean: {
+			tests: ["tmp"],
+			options: {
+				deleteEmptyFolders: true
+			}
+		},
 
-	// Configuration to be run (and then tested).
-	"svg-sprites": {
-		options: {
-			paths: {
-				spriteElements: "test/sprite-elements",
-				sprites: "tmp/sprites",
-				css: "tmp/css"
+		// Configuration to be run (and then tested).
+		"svg-sprites": {
+			options: {
+				spriteElementPath: "test/sprite-elements",
+				spritePath: "tmp/sprites",
+				cssPath: "tmp/css"
 			},
-			prefix: "test",
-			sizes: {
-				small: 15,
-				//medium: 30,
-				large: 45
+			shapes: {
+				options: {
+					prefix: "test",
+					sizes: {
+						small: 15,
+						//medium: 30,
+						large: 45
+					},
+					refSize: 30,
+					unit: 5
+				}
 			},
-			refSize: 30,
-			unit: 5
-		}
-	},
+			"black-shapes": {
+				options: {
+					sizes: {
+						medium: 20
+					},
+					refSize: "medium",
+					unit: 40
+				}
+			}
+		},
 
-	// Unit tests.
-	nodeunit: {
-		tests: ["test/*_test.js"],
-	},
+		// Unit tests.
+		nodeunit: {
+			tests: ["test/*_test.js"],
+		}
 
 	});
 	

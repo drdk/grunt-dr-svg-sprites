@@ -24,62 +24,56 @@ In your project's Gruntfile, add a section named `svg-sprites` to the data objec
 
 ```js
 grunt.initConfig({
-  "svg-sprites": {
-    options: {
-      // Task-specific options go here.
-    },
-  },
+	"svg-sprites": {
+		options: {
+			// Task-specific options go here.
+		},
+	},
 })
 ```
 
 ### Options
 
-
-#### options.paths
-
-Type: `Object`
-
-
-##### options.paths.spriteElements
+##### options.spriteElementPath
 Type: `String`
 
-Sprites will be generated from each subfolder and its contained svg-elements.
-
-Given:
+The base path of the elements to be sprited. If set on the uppermost options property the target name will automatically be appended to the path:
 
 ```javascript
-  paths: {
-    spriteElements: "img/_source/sprites/",
+	options: {
+		spriteElementPath: "img/_source/spriteElements"
+		/*  */
+	},
+	icons: {
+		/*  */
+	}
 ```
+
+Will result in: `img/_source/spriteElements` + `/` + `icons`.
 
 ... and a file structure like:
 
 ```
-  _source
-    |- sprites
-      |- icons
-        |- print.svg
-        |- email.svg
-        |- link.svg
+	_source
+		|- sprites
+			|- icons
+				|- print.svg
+				|- email.svg
+				|- link.svg
 ```
 
 ... you would get the resulting sprite for `icons`.
 
-##### options.paths.sprites
+##### options.spritePath
 Type: `String`
 
 Destination path of the generated sprite images.
 
-##### options.paths.css
+##### options.cssPath
 Type: `String`
 
 Optional. Destination path of the generated stylesheet. If left blank only svg sprites and png fallbacks are generated.
-
-##### options.paths.elements
-Type: `String`
-
-Optional. Source path of svg elements to composite sprite-elements.
-      
+			
 #### options.prefix
 Type: `String`
 Default value: `''`
@@ -104,10 +98,10 @@ Type: `Object`
 A hash of size labels and values (`Number`) that define the different sizes of the needed sprites.
 
 ```javascript
-  sizes: {
-    large: 30,
-    small: 15
-  }
+	sizes: {
+		large: 30,
+		small: 15
+	}
 ```
 
 #### options.refSize
@@ -115,85 +109,52 @@ Type: `String|Number`
 
 Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
 
-        
-#### options.sprites
-Type: `Object`
-
-An object 
-{spriteName}
-
-
 ### Usage Examples
 
 #### Basic Options
 
 ```js
 grunt.initConfig({
-  "svg-sprites": {
-    options: {
-      paths: {
-        spriteElements: "img/svg-logos",
-        sprites: "img/sprites",
-        css: "css",
-      },
-      sizes: {
-        xlarge: 36,
-        large: 24,
-        small: 16
-      },
-      refSize: "large",
-      unit: 8,
-    },
-  },
+	"svg-sprites": {
+		options: {
+			spriteElementPath: "img/svg-logos"
+			spritePath: "img/sprites",
+			cssPath: "css"
+		},
+		shapes: {
+			options: {
+				sizes: {
+					xlarge: 36,
+					large: 24,
+					small: 16
+				},
+				refSize: "large",
+				unit: 8
+			}
+		}
+	}
 })
 ```
 
-#### Advanced Options
 
-You can even compose svg-elements from smaller elements if you define a `sprites` object. Each key will describe a sprite as an array where each index in turn describes an svg-element.
+If you need to compose SVG elements you can use [dr-svg-grunt-composer](https://github.com/drdk/dr-grunt-svg-composer) to preproces them before building sprites.
 
-```js
-grunt.initConfig({
-  "svg-sprites": {
-    options: {
-      paths: {
-        elements: "img/svg-logo-elements",
-        spriteElements: "img/svg-logos",
-        sprites: "img/sprites",
-        css: "css",
-      },
-      sizes: {
-        xlarge: 36,
-        small: 16
-      },
-      refSize: 24,
-      unit: 8,
-    },
-    sprites: {
-      shapes: [
-        {
-          name: "trangle-circle",
-          elements: [
-            {name: "triangle"},
-            {name: "circle", x: -5, fill: "#000"}
-          ]
-        },
-        {
-          name: "triangle-square",
-          elements: [
-            {name: "triangle", fill: "#F00"},
-            {name: "square", x: -10, y: 5}
-          ]
-        }
-      ]
-    },
-  },
-})
-```
+
 
 ---
 
 ## Changelog
+
+### 0.5.0
+
+Features:
+
+* Proper target support.
+
+Changes:
+
+* `options.paths` properties have become: `spriteElementPath`, `spritePath` and `cssPath`.
+* `options.sprites` should now be configured as separate targets.
 
 ### 0.2.8
 

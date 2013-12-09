@@ -2,7 +2,7 @@
  * dr-grunt-svg-sprites
  * 
  *
- * Copyright (c) 2013 rasmusfl0e
+ * Copyright (c) 2013 drdk
  * Licensed under the MIT license.
  */
 
@@ -10,41 +10,31 @@
 
 module.exports = function(grunt) {
 
-	var async = require("async"),
-		spriteBuilder = require("dr-svg-sprites").builder,
-		spriteElementComposer;
+	var builder = require("dr-svg-sprites");
 
-	grunt.registerTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
+	grunt.registerMultiTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
 
 		var options = this.options({
 			prefix: "",
 			cssSuffix: "css"
 		});
 
+		if ("spriteElementPath" in  this.data) {
+
+		}
+		else {
+			options.spriteElementPath += "/" + this.target;
+		}
+
+		options.name = this.target;
+
 		var done = this.async();
 
 		console.log("Building SVG sprites...");
 
-		var tasks = [];
+		console.log(JSON.stringify(options));
 
-		if (options.sprites) {
-
-			spriteElementComposer = require("dr-svg-sprites").composer;
-
-			tasks.push(function (callback) {
-				spriteElementComposer(options, callback);
-			});
-
-		}
-
-		tasks.push(function (callback) {
-			spriteBuilder(options, callback);
-		});
-
-		async.series(tasks, function (err) {
-			if (err) {
-				console.error(err);
-			}
+		builder(options, function () {
 			console.log("Done.");
 			done();
 		});
