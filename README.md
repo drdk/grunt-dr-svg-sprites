@@ -91,7 +91,6 @@ Type: `Number`
 Default value: `10`
 
 Defines unit size of the grid the sprite elements snap to.
-```
 
 #### options.refSize
 Type: `String|Number`
@@ -110,6 +109,7 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 		large: 39,
 		small: 13
 	}
+```
 
 ![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/docs-sprite-sizes.png)
 
