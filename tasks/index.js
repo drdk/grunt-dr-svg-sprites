@@ -32,8 +32,6 @@ module.exports = function(grunt) {
 
 		console.log("Building SVG sprites...");
 
-		console.log(JSON.stringify(options));
-
 		builder(options, function () {
 			console.log("Done.");
 			done();
