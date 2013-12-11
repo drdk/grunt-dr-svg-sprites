@@ -91,6 +91,14 @@ Type: `Number`
 Default value: `10`
 
 Defines unit size of the grid the sprite elements snap to.
+```
+
+#### options.refSize
+Type: `String|Number`
+
+Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
+
+![Source elements and refSize](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/docs-source-elements.png)
 
 #### options.sizes
 Type: `Object`
@@ -99,15 +107,11 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 
 ```javascript
 	sizes: {
-		large: 30,
-		small: 15
+		large: 39,
+		small: 13
 	}
-```
 
-#### options.refSize
-Type: `String|Number`
-
-Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
+![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/docs-sprite-sizes.png)
 
 ### Usage Examples
 
@@ -124,11 +128,11 @@ grunt.initConfig({
 		shapes: {
 			options: {
 				sizes: {
-					xlarge: 36,
-					large: 24,
-					small: 16
+					large: 39,
+					medium: 26,
+					small: 13
 				},
-				refSize: "large",
+				refSize: "medium",
 				unit: 8
 			}
 		}
