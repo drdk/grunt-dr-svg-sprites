@@ -97,7 +97,7 @@ Type: `String|Number`
 
 Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
 
-![Source elements and refSize](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/docs-source-elements.png)
+![Source elements and refSize](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-source-elements.png)
 
 #### options.sizes
 Type: `Object`
@@ -111,7 +111,7 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 	}
 ```
 
-![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/docs-sprite-sizes.png)
+![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-sprite-sizes.png)
 
 ### Usage Examples
 
