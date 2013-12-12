@@ -36,26 +36,26 @@ module.exports = function(grunt) {
 		// Configuration to be run (and then tested).
 		"svg-sprites": {
 			options: {
-				spriteElementPath: "test/sprite-elements",
-				spritePath: "tmp/sprites",
+				spriteElementPath: "test/img",
+				spritePath: "tmp/img/sprites",
 				cssPath: "tmp/css"
 			},
 			shapes: {
 				options: {
 					prefix: "test",
 					sizes: {
-						small: 15,
-						//medium: 30,
-						large: 45
+						small: 13,
+						//medium: 26,
+						large: 39
 					},
-					refSize: 30,
+					refSize: 26,
 					unit: 5
 				}
 			},
 			"black-shapes": {
 				options: {
 					sizes: {
-						medium: 20
+						medium: 26
 					},
 					refSize: "medium",
 					unit: 40

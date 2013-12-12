@@ -37,32 +37,35 @@ grunt.initConfig({
 ##### options.spriteElementPath
 Type: `String`
 
-The base path of the elements to be sprited. If set on the uppermost options property the target name will automatically be appended to the path:
+The base path of the elements to be sprited.
 
-```javascript
+If set in the target options it will overwrite the global options.
+
+If set on the uppermost options property the target name will automatically be appended to the path:
+
+```js
 	options: {
-		spriteElementPath: "img/_source/spriteElements"
-		/*  */
+		spriteElementPath: "img",
+		// more options
 	},
-	icons: {
-		/*  */
+	shapes: {
+		// more options
 	}
 ```
 
-Will result in: `img/_source/spriteElements` + `/` + `icons`.
+Will result in: `img/shapes`.
 
 ... and a file structure like:
 
 ```
-	_source
-		|- sprites
-			|- icons
-				|- print.svg
-				|- email.svg
-				|- link.svg
+	img
+		|- shapes
+			|- circle.svg
+			|- square.svg
+			|- triangle.svg
 ```
 
-... you would get the resulting sprite for `icons`.
+... you would get the resulting sprite for `shapes`.
 
 ##### options.spritePath
 Type: `String`
@@ -71,20 +74,32 @@ Destination path of the generated sprite images.
 
 ##### options.cssPath
 Type: `String`
+Optional
 
-Optional. Destination path of the generated stylesheet. If left blank only svg sprites and png fallbacks are generated.
+Destination path of the generated stylesheet. If left blank only svg sprites and png fallbacks are generated.
 			
 #### options.prefix
 Type: `String`
 Default value: `''`
+Optional
 
-Optional. Defines a prefix for the name of the sprite stylesheet and images and also classnames. 
+Defines a prefix for the name of the sprite stylesheet and images and also classnames.
+
+```js
+	shapes: {
+		prefix: "test",
+		// more options
+	}
+```
+
+Would result in: `test-shapes-sprite.css`, `test-shapes-sprite.svg` and `test-shapes-large-sprite.png`.
 
 #### options.cssSuffix
 Type: `String`
 Default value: `'css'`
+Optional
 
-Optional. Stylesheet filetype suffix. 
+Stylesheet filetype suffix. 
 
 #### options.unit
 Type: `Number`
@@ -99,12 +114,14 @@ Defines the basic height of your source svg-elements. All other sizes will be ca
 
 ![Source elements and refSize](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-source-elements.png)
 
+Notice how one source element is bigger than the `refSize`; this ok - as every element is scaled proportionally.
+
 #### options.sizes
 Type: `Object`
 
 A hash of size labels and values (`Number`) that define the different sizes of the needed sprites.
 
-```javascript
+```js
 	sizes: {
 		large: 39,
 		small: 13
@@ -112,6 +129,8 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 ```
 
 ![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-sprite-sizes.png)
+
+Only 1 SVG sprite is rendered and 1 PNG sprite per defined size.
 
 ### Usage Examples
 
@@ -121,7 +140,7 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 grunt.initConfig({
 	"svg-sprites": {
 		options: {
-			spriteElementPath: "img/svg-logos"
+			spriteElementPath: "img"
 			spritePath: "img/sprites",
 			cssPath: "css"
 		},
@@ -129,15 +148,14 @@ grunt.initConfig({
 			options: {
 				sizes: {
 					large: 39,
-					medium: 26,
 					small: 13
 				},
-				refSize: "medium",
-				unit: 8
+				refSize: 26,
+				unit: 13
 			}
 		}
 	}
-})
+});
 ```
 
 
