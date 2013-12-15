@@ -140,7 +140,7 @@ Only 1 SVG sprite is rendered and 1 PNG sprite per defined size.
 grunt.initConfig({
 	"svg-sprites": {
 		options: {
-			spriteElementPath: "img"
+			spriteElementPath: "img",
 			spritePath: "img/sprites",
 			cssPath: "css"
 		},
