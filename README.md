@@ -191,3 +191,5 @@ Features:
 * `options.prefix` will now affect classnames also.
 * `options.refSize` is now no longer limited to sizes defined in `options.sizes`; it can take a raw number.  
 
+
+[![Analytics](https://ga-beacon.appspot.com/UA-8318361-2/drdk/dr-grunt-svg-sprites)](https://github.com/igrigorik/ga-beacon)
