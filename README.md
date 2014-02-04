@@ -158,6 +158,45 @@ grunt.initConfig({
 });
 ```
 
+#### Example of a task with multiple sprites configured
+
+```js
+grunt.initConfig({
+	"svg-sprites": {
+		"spriteOne": {
+			options: {
+				spriteElementPath: "source/img/svg",
+				spritePath: "source/img/svg/spriteOneSvgsInHere",
+				cssPath: "source/css",
+				prefix: "One",
+				sizes: {
+					large: 55
+				},
+				refSize: 26,
+				unit: 13
+			}
+		},
+		"spriteTwo": {
+			options: {
+				spriteElementPath: "source/img/svg",
+				spritePath: "source/img/svg/spriteTwoSvgsInHere",
+				cssPath: "source/css",
+				prefix: "Two",
+				sizes: {
+					large: 65
+				},
+				refSize: 26,
+				unit: 13
+			}
+		}
+	}
+});
+```
+
+The above example will generate two seperate image sprites for the two targets (with both a PNG and SVG sprite for each). It's important to remember that the name of the Sprite target, for example, "spriteOne" and "spriteTwo" in this example, are the folder names that the task looks for *inside* the spriteElementPath.
+
+Also note in the above example, if the SVGs have width and height set far bigger than you would like (e.g. `width="960" height="560"`), the 'sizes' gives you control over the output PNG (SVG unimportant as it is vector). In this instance, `spriteTwo` will have a PNG sprite that is 65px tall.
+
 
 If you need to compose SVG elements you can use [dr-svg-grunt-composer](https://github.com/drdk/dr-grunt-svg-composer) to preproces them before building sprites.
 
