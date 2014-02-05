@@ -222,6 +222,12 @@ If you need to compose SVG elements you can use [dr-svg-grunt-composer](https://
 
 ## Changelog
 
+### 0.5.3
+
+Features:
+
+* `options.cssPprefix` added.
+
 ### 0.5.0
 
 Features:
