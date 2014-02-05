@@ -94,6 +94,22 @@ Defines a prefix for the name of the sprite stylesheet and images and also class
 
 Would result in: `test-shapes-sprite.css`, `test-shapes-sprite.svg` and `test-shapes-large-sprite.png`.
 
+#### options.cssPrefix
+Type: `String`
+Default value: `''`
+Optional
+
+Defines a prefix for the name of the sprite stylesheet (this overrides `options.prefix` if set).
+
+```js
+	shapes: {
+		cssPrefix: "_test",
+		// more options
+	}
+```
+
+Would result in: `_test-shapes-sprite.css`.
+
 #### options.cssSuffix
 Type: `String`
 Default value: `'css'`
