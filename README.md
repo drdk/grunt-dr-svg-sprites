@@ -1,4 +1,4 @@
-# dr-grunt-svg-sprites
+# grunt-dr-svg-sprites
 
 > Grunt plugin to create SVG sprites with PNG fallbacks at needed sizes
 
@@ -8,13 +8,13 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install dr-grunt-svg-sprites --save-dev
+npm install grunt-dr-svg-sprites --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('dr-grunt-svg-sprites');
+grunt.loadNpmTasks('grunt-dr-svg-sprites');
 ```
 
 ## The "svg-sprites" task
@@ -128,7 +128,7 @@ Type: `String|Number`
 
 Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
 
-![Source elements and refSize](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-source-elements.png)
+![Source elements and refSize](https://raw.github.com/drdk/grunt-dr-svg-sprites/master/docs/img/docs-source-elements.png)
 
 Notice how one source element is bigger than the `refSize`; this ok - as every element is scaled proportionally.
 
@@ -144,7 +144,7 @@ A hash of size labels and values (`Number`) that define the different sizes of t
 	}
 ```
 
-![sizes](https://raw.github.com/drdk/dr-grunt-svg-sprites/master/docs/img/docs-sprite-sizes.png)
+![sizes](https://raw.github.com/drdk/grunt-dr-svg-sprites/master/docs/img/docs-sprite-sizes.png)
 
 Only 1 SVG sprite is rendered and 1 PNG sprite per defined size.
 
@@ -214,13 +214,17 @@ The above example will generate two seperate image sprites for the two targets (
 Also note in the above example, if the SVGs have width and height set far bigger than you would like (e.g. `width="960" height="560"`), the 'sizes' gives you control over the output PNG (SVG unimportant as it is vector). In this instance, `spriteTwo` will have a PNG sprite that is 65px tall.
 
 
-If you need to compose SVG elements you can use [dr-svg-grunt-composer](https://github.com/drdk/dr-grunt-svg-composer) to preproces them before building sprites.
+If you need to compose SVG elements you can use [dr-grunt-svg-composer](https://github.com/drdk/dr-grunt-svg-composer) to preproces them before building sprites.
 
 
 
 ---
 
 ## Changelog
+
+### 0.5.5
+
+**Important!** Renamed repo and npm module to `grunt-dr-svg-sprites` inlining with standard naming convention for grunt tasks. `dr-grunt-svg-sprites` is now deprecated.
 
 ### 0.5.3
 
@@ -253,4 +257,4 @@ Features:
 * `options.refSize` is now no longer limited to sizes defined in `options.sizes`; it can take a raw number.  
 
 
-[![Analytics](https://ga-beacon.appspot.com/UA-8318361-2/drdk/dr-grunt-svg-sprites)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-8318361-2/drdk/grunt-dr-svg-sprites)](https://github.com/igrigorik/ga-beacon)
