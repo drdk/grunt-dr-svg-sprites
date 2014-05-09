@@ -49,16 +49,35 @@ module.exports = function(grunt) {
 						large: 39
 					},
 					refSize: 26,
-					unit: 5
+					unit: 5,
+					cssPngPrefix: ".no-svg"
 				}
 			},
 			"black-shapes": {
 				options: {
 					sizes: {
-						medium: 26
+						medium: 26,
+						large: 39
 					},
 					refSize: "medium",
-					unit: 40
+					unit: 40,
+					map: {
+						"circle": "ball",
+						"square": "block",
+						"triangle": "pyramid"
+					}
+				}
+			},
+			"one-size": {
+				options: {
+					spriteElementPath: "test/img/shapes",
+					unit: 10,
+					cssSuffix: "less",
+					cssUnit: "rem",
+					layout: "vertical",
+					map: function (name) {
+						return name.toUpperCase();
+					}
 				}
 			}
 		},

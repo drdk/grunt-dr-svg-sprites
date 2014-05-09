@@ -2,7 +2,7 @@
  * dr-grunt-svg-sprites
  * 
  *
- * Copyright (c) 2013 drdk
+ * Copyright (c) 2014 drdk
  * Licensed under the MIT license.
  */
 
@@ -14,15 +14,9 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
 
-		var options = this.options({
-			prefix: "",
-			cssSuffix: "css"
-		});
+		var options = this.options({});
 
-		if ("spriteElementPath" in  this.data) {
-
-		}
-		else {
+		if (!this.data.options || !("spriteElementPath" in this.data.options)) {
 			options.spriteElementPath += "/" + this.target;
 		}
 

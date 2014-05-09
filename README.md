@@ -29,10 +29,16 @@ grunt.initConfig({
 			// Task-specific options go here.
 		},
 	},
-})
+});
 ```
 
 ### Options
+
+The options are inherited from [dr-svg-sprites](https://github.com/drdk/dr-svg-sprites#options) with the following differences:
+
+##### options.name
+
+This will automatically be the target name. No need to manually add it.
 
 ##### options.spriteElementPath
 Type: `String`
@@ -44,13 +50,19 @@ If set in the target options it will overwrite the global options.
 If set on the uppermost options property the target name will automatically be appended to the path:
 
 ```js
-	options: {
-		spriteElementPath: "img",
-		// more options
-	},
-	shapes: {
-		// more options
+grunt.initConfig({
+	"svg-sprites": {
+		options: {
+			spriteElementPath: "img",
+			// more options
+		},
+		shapes: {
+			options: {
+				// more options
+			}
+		}
 	}
+});
 ```
 
 Will result in: `img/shapes`.
@@ -67,86 +79,7 @@ Will result in: `img/shapes`.
 
 ... you would get the resulting sprite for `shapes`.
 
-##### options.spritePath
-Type: `String`
 
-Destination path of the generated sprite images.
-
-##### options.cssPath
-Type: `String`
-Optional
-
-Destination path of the generated stylesheet. If left blank only svg sprites and png fallbacks are generated.
-			
-#### options.prefix
-Type: `String`
-Default value: `''`
-Optional
-
-Defines a prefix for the name of the sprite stylesheet and images and also classnames.
-
-```js
-	shapes: {
-		prefix: "test",
-		// more options
-	}
-```
-
-Would result in: `test-shapes-sprite.css`, `test-shapes-sprite.svg` and `test-shapes-large-sprite.png`.
-
-#### options.cssPrefix
-Type: `String`
-Default value: `''`
-Optional
-
-Defines a prefix for the name of the sprite stylesheet (this overrides `options.prefix` if set).
-
-```js
-	shapes: {
-		cssPrefix: "_test",
-		// more options
-	}
-```
-
-Would result in: `_test-shapes-sprite.css`.
-
-#### options.cssSuffix
-Type: `String`
-Default value: `'css'`
-Optional
-
-Stylesheet filetype suffix. 
-
-#### options.unit
-Type: `Number`
-Default value: `10`
-
-Defines unit size of the grid the sprite elements snap to.
-
-#### options.refSize
-Type: `String|Number`
-
-Defines the basic height of your source svg-elements. All other sizes will be calculated relating to this. It can either be a key from the `sizes` option (which refers to a number) or just a raw number.
-
-![Source elements and refSize](https://raw.github.com/drdk/grunt-dr-svg-sprites/master/docs/img/docs-source-elements.png)
-
-Notice how one source element is bigger than the `refSize`; this ok - as every element is scaled proportionally.
-
-#### options.sizes
-Type: `Object`
-
-A hash of size labels and values (`Number`) that define the different sizes of the needed sprites.
-
-```js
-	sizes: {
-		large: 39,
-		small: 13
-	}
-```
-
-![sizes](https://raw.github.com/drdk/grunt-dr-svg-sprites/master/docs/img/docs-sprite-sizes.png)
-
-Only 1 SVG sprite is rendered and 1 PNG sprite per defined size.
 
 ### Usage Examples
 
@@ -155,19 +88,11 @@ Only 1 SVG sprite is rendered and 1 PNG sprite per defined size.
 ```js
 grunt.initConfig({
 	"svg-sprites": {
-		options: {
-			spriteElementPath: "img",
-			spritePath: "img/sprites",
-			cssPath: "css"
-		},
-		shapes: {
+		tv: {
 			options: {
-				sizes: {
-					large: 39,
-					small: 13
-				},
-				refSize: 26,
-				unit: 13
+				spriteElementPath: "img/logos/tv",
+				spritePath: "img/sprites/dr-logos-tv-sprite.svg",
+				cssPath: "css/dr-logos-tv-sprite.css"
 			}
 		}
 	}
@@ -179,48 +104,46 @@ grunt.initConfig({
 ```js
 grunt.initConfig({
 	"svg-sprites": {
-		"spriteOne": {
+		options: {
+			spriteElementPath: "img/logos",
+			spritePath: "img/sprites",
+			cssPath: "css",
+			prefix: "dr-logos"
+		},
+		tv: {
 			options: {
-				spriteElementPath: "source/img/svg",
-				spritePath: "source/img/svg/spriteOneSvgsInHere",
-				cssPath: "source/css",
-				prefix: "One",
 				sizes: {
-					large: 55
+					large: 24,
+					small: 16
 				},
-				refSize: 26,
-				unit: 13
+				refSize: "large",
+				unit: 6
 			}
 		},
-		"spriteTwo": {
+		radio: {
 			options: {
-				spriteElementPath: "source/img/svg",
-				spritePath: "source/img/svg/spriteTwoSvgsInHere",
-				cssPath: "source/css",
-				prefix: "Two",
 				sizes: {
-					large: 65
+					small: 16
 				},
-				refSize: 26,
-				unit: 13
+				refSize: 24,
+				unit: 12,
+				cssUnit: "rem"
 			}
 		}
 	}
 });
 ```
 
-The above example will generate two seperate image sprites for the two targets (with both a PNG and SVG sprite for each). It's important to remember that the name of the Sprite target, for example, "spriteOne" and "spriteTwo" in this example, are the folder names that the task looks for *inside* the spriteElementPath.
-
-Also note in the above example, if the SVGs have width and height set far bigger than you would like (e.g. `width="960" height="560"`), the 'sizes' gives you control over the output PNG (SVG unimportant as it is vector). In this instance, `spriteTwo` will have a PNG sprite that is 65px tall.
-
-
-If you need to compose SVG elements you can use [dr-grunt-svg-composer](https://github.com/drdk/dr-grunt-svg-composer) to preproces them before building sprites.
-
-
 
 ---
 
 ## Changelog
+
+### 0.9.0
+
+Changes:
+
+* Moved all documentation not directly related to the grunt wrapper to [dr-svg-sprites](https://github.com/drdk/dr-svg-sprites). All future issues regarding anything other than the grunt wrapper should be posted there :)
 
 ### 0.5.5
 
