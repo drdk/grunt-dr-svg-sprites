@@ -38,7 +38,8 @@ module.exports = function(grunt) {
 			options: {
 				spriteElementPath: "test/img",
 				spritePath: "tmp/img/sprites",
-				cssPath: "tmp/css"
+				cssPath: "tmp/css",
+				previewPath: "tmp"
 			},
 			shapes: {
 				options: {
@@ -74,11 +75,12 @@ module.exports = function(grunt) {
 					unit: 10,
 					cssSuffix: "less",
 					cssUnit: "rem",
-					layout: "vertical",
+					layout: "alt-diagonal",
 					cssSvgPrefix: ".svg",
 					cssPngPrefix: ".no-svg",
+					cssIncludeElementSizes: false,
 					map: function (name) {
-						return name.toUpperCase();
+						return name.split().reverse().join();
 					}
 				}
 			}
