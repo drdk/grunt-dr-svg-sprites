@@ -75,6 +75,8 @@ module.exports = function(grunt) {
 					cssSuffix: "less",
 					cssUnit: "rem",
 					layout: "vertical",
+					cssSvgPrefix: ".svg",
+					cssPngPrefix: ".no-svg",
 					map: function (name) {
 						return name.toUpperCase();
 					}
