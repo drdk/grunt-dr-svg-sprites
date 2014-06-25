@@ -1,8 +1,8 @@
 /*
- * dr-grunt-svg-sprites
+ * grunt-dr-svg-sprites
  * 
  *
- * Copyright (c) 2013 rasmusfl0e
+ * Copyright (c) 2014 drdk
  * Licensed under the MIT license.
  */
 
@@ -12,17 +12,6 @@ module.exports = function(grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
-
-		jshint: {
-			all: [
-				"Gruntfile.js",
-				"tasks/*.js",
-				"<%= nodeunit.tests %>",
-			],
-			options: {
-				jshintrc: ".jshintrc",
-			},
-		},
 		
 		// Before generating any new files, remove any previously-created files.
 
@@ -50,7 +39,6 @@ module.exports = function(grunt) {
 						large: 39
 					},
 					refSize: 26,
-					unit: 5,
 					cssPngPrefix: ".no-svg"
 				}
 			},
@@ -84,11 +72,6 @@ module.exports = function(grunt) {
 					}
 				}
 			}
-		},
-
-		// Unit tests.
-		nodeunit: {
-			tests: ["test/*_test.js"],
 		}
 
 	});
@@ -97,15 +80,13 @@ module.exports = function(grunt) {
 	grunt.loadTasks("tasks");
 
 	// These plugins provide necessary tasks.
-	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-clean");
-	grunt.loadNpmTasks("grunt-contrib-nodeunit");
 	
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin"s task(s), then test the result.
-	grunt.registerTask("test", ["clean", "svg-sprites"/*, "nodeunit"*/]);
+	grunt.registerTask("test", ["clean", "svg-sprites"]);
 	
 	// By default, lint and run all tests.
-	grunt.registerTask("default", ["jshint", "test"]);
+	grunt.registerTask("default", ["test"]);
 
 };

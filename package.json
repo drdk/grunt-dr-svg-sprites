@@ -1,7 +1,7 @@
 {
   "name": "grunt-dr-svg-sprites",
   "description": "Grunt plugin to create SVG sprites with PNG fallbacks at needed sizes",
-  "version": "0.9.7",
+  "version": "0.9.9",
   "homepage": "",
   "author": {
     "name": "rasmusfl0e",
@@ -25,18 +25,12 @@
     "node": ">= 0.8.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-nodeunit": "~0.2.2",
-    "async": "*"
+    "grunt": "^0.4.4",
+    "grunt-contrib-clean": "~0.5.0"
   },
   "dependencies": {
     "async": "^0.8.0",
-    "dr-svg-sprites": "^0.9.7",
-    "grunt": "^0.4.4",
-    "grunt-contrib-jshint": "^0.7.2",
-    "grunt-contrib-nodeunit": "^0.2.2"
+    "dr-svg-sprites": "^0.9.9"
   },
   "keywords": [
     "gruntplugin",
