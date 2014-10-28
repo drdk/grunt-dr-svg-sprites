@@ -1,5 +1,5 @@
 /*
- * dr-grunt-svg-sprites
+ * grunt-dr-svg-sprites
  * 
  *
  * Copyright (c) 2014 drdk
@@ -12,7 +12,13 @@ module.exports = function(grunt) {
 
 	var builder = require("dr-svg-sprites");
 
-	grunt.registerMultiTask("svg-sprites", "Build SVG sprites with PNG fallbacks", function() {
+	var desc = "Build SVG sprites with PNG fallbacks";
+
+	grunt.registerMultiTask("dr-svg-sprites", desc, task);
+
+	grunt.registerMultiTask("svg-sprites", desc, task);
+	
+	function task () {
 
 		var options = this.options({});
 
@@ -31,6 +37,6 @@ module.exports = function(grunt) {
 			done();
 		});
 	
-	});
+	}
 
 };

@@ -20,11 +20,11 @@ grunt.loadNpmTasks('grunt-dr-svg-sprites');
 ## The "svg-sprites" task
 
 ### Overview
-In your project's Gruntfile, add a section named `svg-sprites` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `dr-svg-sprites` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-	"svg-sprites": {
+	"dr-svg-sprites": {
 		options: {
 			// Task-specific options go here.
 		},
@@ -51,7 +51,7 @@ If set on the uppermost options property the target name will automatically be a
 
 ```js
 grunt.initConfig({
-	"svg-sprites": {
+	"dr-svg-sprites": {
 		options: {
 			spriteElementPath: "img",
 			// more options
@@ -87,7 +87,7 @@ Will result in: `img/shapes`.
 
 ```js
 grunt.initConfig({
-	"svg-sprites": {
+	"dr-svg-sprites": {
 		tv: {
 			options: {
 				spriteElementPath: "img/logos/tv",
@@ -103,7 +103,7 @@ grunt.initConfig({
 
 ```js
 grunt.initConfig({
-	"svg-sprites": {
+	"dr-svg-sprites": {
 		options: {
 			spriteElementPath: "img/logos",
 			spritePath: "img/sprites",
@@ -138,6 +138,12 @@ grunt.initConfig({
 ---
 
 ## Changelog
+
+### 0.9.15
+
+Changes:
+
+* Task is now more acurately named `dr-svg-sprites` instead of `svg-sprites` to allow smoother usage with more strict grunt task loaders like [jit-grunt](https://github.com/shootaroo/jit-grunt). The `svg-sprites` name is not yet deprecated though - both names can be used.
 
 ### 0.9.0
 
