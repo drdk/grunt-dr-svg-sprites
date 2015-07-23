@@ -140,11 +140,17 @@ grunt.initConfig({
 
 ## Changelog
 
+### 0.9.30
+
+Changes:
+
+* Updated dependencies.
+
 ### 0.9.15
 
 Changes:
 
-* Task is now more acurately named `dr-svg-sprites` instead of `svg-sprites` to allow smoother usage with more strict grunt task loaders like [jit-grunt](https://github.com/shootaroo/jit-grunt). The `svg-sprites` name is not yet deprecated though - both names can be used.
+* Task is now more accurately named `dr-svg-sprites` instead of `svg-sprites` to allow smoother usage with more strict grunt task loaders like [jit-grunt](https://github.com/shootaroo/jit-grunt). The `svg-sprites` name is not yet deprecated though - both names can be used.
 
 ### 0.9.0
 
