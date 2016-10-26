@@ -1,11 +1,3 @@
-/*
- * grunt-dr-svg-sprites
- * 
- *
- * Copyright (c) 2014 drdk
- * Licensed under the MIT license.
- */
-
 "use strict";
 
 module.exports = function(grunt) {
