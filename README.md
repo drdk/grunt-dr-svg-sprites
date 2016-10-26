@@ -140,6 +140,13 @@ grunt.initConfig({
 
 ## Changelog
 
+### 1.0.0
+
+Changes:
+
+* Updated dependencies.
+* Requires node version 6+.
+
 ### 0.9.30
 
 Changes:
